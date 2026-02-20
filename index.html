@@ -2,233 +2,212 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Question 🌸</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Special Invitation 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <style>
         :root {
-            --pink: #ffafcc;
-            --dark-pink: #fb6f92;
-            --india-blue: #192f6a;
-            --india-orange: #ff9933;
+            --primary: #ff758c;
+            --secondary: #ff7eb3;
+            --glass: rgba(255, 255, 255, 0.2);
+            --india-saffron: #FF9933;
+            --india-green: #128807;
         }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            background-color: #fff0f3;
+            font-family: 'Inter', sans-serif;
+            background: #fff0f3;
+            height: 100%; overflow: hidden;
         }
 
-        /* Loading Screen */
-        #loader {
-            position: fixed;
-            height: 100vh; width: 100%;
-            background: white;
-            z-index: 9999;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-        }
-
-        .heart-loader {
-            font-size: 50px;
-            animation: beat 1s infinite;
-        }
-
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* Page 1: The Question */
-        #page1 {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            height: 100vh; text-align: center;
-        }
-
-        .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(251, 111, 146, 0.3);
-            width: 85%; max-width: 400px;
-            border: 2px solid var(--pink);
-        }
-
-        h1 { color: var(--dark-pink); font-size: 1.8rem; margin-bottom: 20px; }
-
-        .btn-group {
-            margin-top: 30px;
-            display: flex; justify-content: center;
-            gap: 20px; position: relative; height: 100px;
-        }
-
-        button {
-            padding: 15px 40px;
-            font-size: 1.1rem; border: none;
-            border-radius: 50px; cursor: pointer;
-            font-weight: 600; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        #yesBtn { background: linear-gradient(45deg, #4CAF50, #81C784); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        #noBtn { background-color: #ff4d6d; color: white; position: absolute; left: 55%; }
-
-        /* Page 2: The High-End Reveal */
-        #page2 {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #ffafcc, #ff9933, #192f6a, #fb6f92);
+        /* High-End Background Animation */
+        .bg-gradient {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            padding: 40px 20px; text-align: center;
+            animation: gradient 15s ease infinite;
+            z-index: -1;
         }
 
-        @keyframes gradientBG {
+        @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        .countdown {
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px; border-radius: 20px;
-            margin-bottom: 30px; backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white; font-weight: 600;
+        /* Initial Question Page */
+        #page1 {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            height: 100vh; padding: 20px; text-align: center;
         }
 
-        .glass-card {
+        .glass-container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px; border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 400px; width: 100%;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 30px; line-height: 1.4; }
+
+        .btn-wrapper {
+            display: flex; justify-content: center; gap: 20px;
+            position: relative; height: 60px; margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 35px; border-radius: 50px;
+            font-size: 1.1rem; font-weight: 600; border: none;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+
+        #yesBtn { background: #ff4d6d; color: white; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3); }
+        #noBtn { background: #6c757d; color: white; position: absolute; left: 55%; }
+
+        /* Reveal Page */
+        #page2 {
+            display: none; height: 100vh; overflow-y: auto;
+            padding: 40px 20px; text-align: center; color: white;
+        }
+
+        .timer-bar {
+            background: rgba(255,255,255,0.2);
+            padding: 15px; border-radius: 20px; margin-bottom: 30px;
+            backdrop-filter: blur(5px); font-weight: 600;
+        }
+
+        .event-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 25px; margin: 20px auto;
-            max-width: 450px; color: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 25px; padding: 25px; margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: left; transition: transform 0.3s ease;
         }
 
-        .shayari-box {
+        .event-card:hover { transform: translateY(-5px); }
+
+        .event-card h2 { margin-top: 0; color: #fff; font-size: 1.4rem; }
+        .tag { display: inline-block; padding: 5px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; }
+        .tag-movie { background: #ff7eb3; }
+        .tag-cricket { background: var(--india-saffron); }
+
+        .shayari {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem; color: #fff;
-            margin-top: 40px; padding: 20px;
-            background: rgba(0,0,0,0.2); border-radius: 20px;
+            font-size: 1.6rem; margin: 40px 0; line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .emoji-fall { position: fixed; pointer-events: none; z-index: 999; animation: fall 3s linear forwards; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        .emoji-rain { position: fixed; pointer-events: none; z-index: 1000; }
     </style>
 </head>
 <body>
 
-    <div id="loader">
-        <div class="heart-loader">💖</div>
-        <p style="color: #fb6f92; font-weight: bold;">Creating something special...</p>
-    </div>
+    <div class="bg-gradient"></div>
 
     <div id="page1">
-        <div class="container">
-            <h1>Hello Cutiepie 🌸🎀<br><br>Is it okay if I officially block your Saturday and Sunday this weekend?</h1>
-            <div class="btn-group">
-                <button id="yesBtn" onclick="celebrate()">YES</button>
-                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+        <div class="glass-container">
+            <h1>Hello Cutiepie 🌸🎀<br>Is it okay if I officially block your Saturday and Sunday this weekend?</h1>
+            <div class="btn-wrapper">
+                <button id="yesBtn" class="btn" onclick="accept()">YES</button>
+                <button id="noBtn" class="btn" onmouseover="dodge()" onclick="dodge()">NO</button>
             </div>
         </div>
     </div>
 
     <div id="page2">
-        <div class="countdown" id="timer">Counting down to our time...</div>
+        <div class="timer-bar" id="countdown">Calculating hours until happiness...</div>
         
-        <h1 style="color: white; font-family: 'Dancing Script', cursive; font-size: 3rem; text-shadow: 2px 4px 10px rgba(0,0,0,0.3);">Yay! See you soon ❤️</h1>
-        
-        <div class="glass-card">
-            <h2 style="color: #ffafcc;">Day 1: Saturday 🎬</h2>
-            <p style="font-size: 1.2rem; font-weight: 600;">MOVIE DATE</p>
+        <h1 style="font-family: 'Dancing Script', cursive; font-size: 3rem; margin-bottom: 10px;">It's a Date! ❤️</h1>
+        <p style="margin-bottom: 40px;">I've already pictured this weekend with you... feels nice already.</p>
+
+        <div class="event-card">
+            <span class="tag tag-movie">SATURDAY 🎬</span>
+            <h2>Movie Date</h2>
             <p>"I pretend to focus on the screen but actually watch you smile 🫣🥰"</p>
-            <p>📍 Nexus Mall, Koramangala</p>
+            <p style="opacity: 0.8;">📍 Nexus Mall, Koramangala</p>
         </div>
 
-        <div class="glass-card" style="border-left: 5px solid var(--india-orange);">
-            <h2 style="color: var(--india-orange);">Day 2: Sunday 🏏</h2>
-            <p style="font-size: 1.2rem; font-weight: 600;">MATCH DATE</p>
+        <div class="event-card" style="border-bottom: 5px solid var(--india-green);">
+            <span class="tag tag-cricket">SUNDAY 🏏</span>
+            <h2>Match Date</h2>
             <p>"We cheer for India together and I celebrate every boundary like I just won you. ❤️"</p>
-            <p>📍 Sky Garden Bar & Kitchen, Koramangala</p>
+            <p style="opacity: 0.8;">📍 Sky Garden Bar & Kitchen, Koramangala</p>
         </div>
 
-        <div class="shayari-box">
+        <div class="shayari">
             "Kuch panne waqt ke, hum saath likhenge,<br>
             Ek din cricket, ek din movie ke naam likhenge.<br>
             Tumhari muskurahat hi meri asli jeet hai,<br>
-            Is weekend ko hum, apni sabse pyaari yaad likhenge." ✨
+            Is weekend ko hum, apni sabse pyaari yaad likhenge."
         </div>
     </div>
 
     <script>
-        // Loader timeout
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-            }, 1500);
-        };
-
-        let yesSize = 1;
-        function moveButton() {
+        // Logic for the NO button to jump around
+        function dodge() {
             const noBtn = document.getElementById('noBtn');
-            const yesBtn = document.getElementById('yesBtn');
-            
-            // Move NO button
-            const x = Math.random() * (window.innerWidth - 100);
+            const x = Math.random() * (window.innerWidth - 120);
             const y = Math.random() * (window.innerHeight - 50);
+            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
+            noBtn.style.zIndex = '1000';
 
-            // Grow YES button
-            yesSize += 0.2;
-            yesBtn.style.transform = `scale(${yesSize})`;
-
-            // Spawn dog/crying emojis
-            const icons = ['😭', '🐶', '🐕', '🥺'];
-            for(let i=0; i<8; i++) {
+            // Crying emoji rain
+            for(let i=0; i<10; i++) {
                 const e = document.createElement('div');
-                e.className = 'emoji-fall';
-                e.innerText = icons[Math.floor(Math.random()*icons.length)];
+                e.className = 'emoji-rain';
+                e.innerHTML = Math.random() > 0.5 ? '😭' : '🐶';
                 e.style.left = Math.random() * 100 + 'vw';
-                e.style.top = '-50px';
-                e.style.fontSize = (Math.random()*20 + 20) + 'px';
-                e.style.animationDuration = (Math.random()*2 + 1) + 's';
+                e.style.top = '-20px';
+                e.style.fontSize = '2rem';
+                e.style.transition = 'transform 3s linear';
                 document.body.appendChild(e);
+                
+                setTimeout(() => {
+                    e.style.transform = 'translateY(110vh)';
+                }, 10);
                 setTimeout(() => e.remove(), 3000);
             }
         }
 
-        function celebrate() {
+        // Logic for YES
+        function accept() {
+            // Confetti Cannon
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#ffafcc', '#fb6f92', '#ffffff', '#ff9933', '#192f6a']
+                colors: ['#ff758c', '#ff7eb3', '#FF9933', '#ffffff']
             });
-            
+
             setTimeout(() => {
                 document.getElementById('page1').style.display = 'none';
+                document.body.style.overflow = 'auto';
                 document.getElementById('page2').style.display = 'block';
-                startTimer();
-            }, 500);
+                updateTimer();
+            }, 600);
         }
 
-        function startTimer() {
-            const countDate = new Date("Feb 21, 2026 11:00:00").getTime();
+        // Countdown Logic
+        function updateTimer() {
+            const target = new Date("Feb 21, 2026 11:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
-                const gap = countDate - now;
-                const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((gap % (1000 * 60)) / 1000);
-                document.getElementById('timer').innerText = `Starting in: ${h}h ${m}m ${s}s ❤️`;
+                const dist = target - now;
+                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((dist % (1000 * 60)) / 1000);
+                document.getElementById('countdown').innerHTML = `Starting in: ${h}h ${m}m ${s}s ❤️`;
             }, 1000);
         }
     </script>
