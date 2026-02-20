@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Question 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --pink: #ffafcc;
@@ -13,72 +15,74 @@
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
             background-color: #fff0f3;
         }
 
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            height: 100vh; width: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+
+        .heart-loader {
+            font-size: 50px;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
         /* Page 1: The Question */
         #page1 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            height: 100vh; text-align: center;
         }
 
         .container {
             background: white;
             padding: 2.5rem;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(251, 111, 146, 0.2);
-            width: 85%;
-            max-width: 400px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(251, 111, 146, 0.3);
+            width: 85%; max-width: 400px;
+            border: 2px solid var(--pink);
         }
 
-        h1 { color: var(--dark-pink); font-size: 1.6rem; line-height: 1.4; }
+        h1 { color: var(--dark-pink); font-size: 1.8rem; margin-bottom: 20px; }
 
         .btn-group {
             margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            position: relative;
-            height: 60px;
+            display: flex; justify-content: center;
+            gap: 20px; position: relative; height: 100px;
         }
 
         button {
-            padding: 12px 35px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s ease;
+            padding: 15px 40px;
+            font-size: 1.1rem; border: none;
+            border-radius: 50px; cursor: pointer;
+            font-weight: 600; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #4CAF50; color: white; z-index: 1; }
-        
-        #noBtn { 
-            background-color: #ff4d6d; 
-            color: white; 
-            position: absolute; 
-            left: 55%; /* Starts to the right of YES */
-        }
+        #yesBtn { background: linear-gradient(45deg, #4CAF50, #81C784); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        #noBtn { background-color: #ff4d6d; color: white; position: absolute; left: 55%; }
 
-        /* Page 2: The Reveal */
+        /* Page 2: The High-End Reveal */
         #page2 {
             display: none;
             min-height: 100vh;
-            background: linear-gradient(135deg, #ffafcc 0%, #ff9933 50%, #192f6a 100%);
+            background: linear-gradient(-45deg, #ffafcc, #ff9933, #192f6a, #fb6f92);
             background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            color: white;
-            padding: 30px 15px;
-            text-align: center;
+            animation: gradientBG 15s ease infinite;
+            padding: 40px 20px; text-align: center;
         }
 
         @keyframes gradientBG {
@@ -88,112 +92,143 @@
         }
 
         .countdown {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px);
+            padding: 15px; border-radius: 20px;
+            margin-bottom: 30px; backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.3);
+            color: white; font-weight: 600;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 25px;
-            margin: 15px auto;
-            max-width: 450px;
-            border-radius: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 25px; margin: 20px auto;
+            max-width: 450px; color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .match-card { border-top: 8px solid var(--india-orange); border-bottom: 8px solid #128807; }
-        .movie-card { border-top: 8px solid var(--dark-pink); }
+        .shayari-box {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem; color: #fff;
+            margin-top: 40px; padding: 20px;
+            background: rgba(0,0,0,0.2); border-radius: 20px;
+        }
 
-        .emoji { position: fixed; font-size: 2.5rem; pointer-events: none; z-index: 9999; animation: fall 3s linear forwards; }
+        .emoji-fall { position: fixed; pointer-events: none; z-index: 999; animation: fall 3s linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
+    <div id="loader">
+        <div class="heart-loader">💖</div>
+        <p style="color: #fb6f92; font-weight: bold;">Creating something special...</p>
+    </div>
+
     <div id="page1">
         <div class="container">
             <h1>Hello Cutiepie 🌸🎀<br><br>Is it okay if I officially block your Saturday and Sunday this weekend?</h1>
             <div class="btn-group">
-                <button id="yesBtn" onclick="showPlan()">YES</button>
+                <button id="yesBtn" onclick="celebrate()">YES</button>
                 <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">NO</button>
             </div>
         </div>
     </div>
 
     <div id="page2">
-        <div class="countdown" id="timer">Loading timer...</div>
+        <div class="countdown" id="timer">Counting down to our time...</div>
         
-        <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Yay! See you soon ❤️</h1>
+        <h1 style="color: white; font-family: 'Dancing Script', cursive; font-size: 3rem; text-shadow: 2px 4px 10px rgba(0,0,0,0.3);">Yay! See you soon ❤️</h1>
         
-        <div class="card movie-card">
-            <h2 style="margin-top:0;">Day 1: Saturday 🎬</h2>
-            <p><strong>MOVIE DATE</strong></p>
+        <div class="glass-card">
+            <h2 style="color: #ffafcc;">Day 1: Saturday 🎬</h2>
+            <p style="font-size: 1.2rem; font-weight: 600;">MOVIE DATE</p>
             <p>"I pretend to focus on the screen but actually watch you smile 🫣🥰"</p>
             <p>📍 Nexus Mall, Koramangala</p>
         </div>
 
-        <div class="card match-card">
-            <h2 style="margin-top:0;">Day 2: Sunday 🏏</h2>
-            <p><strong>MATCH DATE</strong></p>
+        <div class="glass-card" style="border-left: 5px solid var(--india-orange);">
+            <h2 style="color: var(--india-orange);">Day 2: Sunday 🏏</h2>
+            <p style="font-size: 1.2rem; font-weight: 600;">MATCH DATE</p>
             <p>"We cheer for India together and I celebrate every boundary like I just won you. ❤️"</p>
             <p>📍 Sky Garden Bar & Kitchen, Koramangala</p>
         </div>
-        
-        <p style="font-weight: bold; font-style: italic;">I’ve already pictured this weekend with you… feels nice already ❤️</p>
+
+        <div class="shayari-box">
+            "Kuch panne waqt ke, hum saath likhenge,<br>
+            Ek din cricket, ek din movie ke naam likhenge.<br>
+            Tumhari muskurahat hi meri asli jeet hai,<br>
+            Is weekend ko hum, apni sabse pyaari yaad likhenge." ✨
+        </div>
     </div>
 
     <script>
+        // Loader timeout
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 1500);
+        };
+
+        let yesSize = 1;
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            // Allow it to move anywhere in the visible window
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            const yesBtn = document.getElementById('yesBtn');
             
-            noBtn.style.position = 'fixed'; // Breaks out of the container to jump everywhere
+            // Move NO button
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
 
-            spawnChaos();
-        }
+            // Grow YES button
+            yesSize += 0.2;
+            yesBtn.style.transform = `scale(${yesSize})`;
 
-        function spawnChaos() {
-            const icons = ['😭', '🐶', '🥺', '💔', '🐕'];
-            for(let i=0; i<10; i++) {
-                const emoji = document.createElement('div');
-                emoji.className = 'emoji';
-                emoji.innerText = icons[Math.floor(Math.random() * icons.length)];
-                emoji.style.left = Math.random() * 100 + 'vw';
-                emoji.style.top = '-50px';
-                emoji.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                document.body.appendChild(emoji);
-                setTimeout(() => emoji.remove(), 3000);
+            // Spawn dog/crying emojis
+            const icons = ['😭', '🐶', '🐕', '🥺'];
+            for(let i=0; i<8; i++) {
+                const e = document.createElement('div');
+                e.className = 'emoji-fall';
+                e.innerText = icons[Math.floor(Math.random()*icons.length)];
+                e.style.left = Math.random() * 100 + 'vw';
+                e.style.top = '-50px';
+                e.style.fontSize = (Math.random()*20 + 20) + 'px';
+                e.style.animationDuration = (Math.random()*2 + 1) + 's';
+                document.body.appendChild(e);
+                setTimeout(() => e.remove(), 3000);
             }
         }
 
-        function showPlan() {
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'block';
-            startTimer();
+        function celebrate() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffafcc', '#fb6f92', '#ffffff', '#ff9933', '#192f6a']
+            });
+            
+            setTimeout(() => {
+                document.getElementById('page1').style.display = 'none';
+                document.getElementById('page2').style.display = 'block';
+                startTimer();
+            }, 500);
         }
 
         function startTimer() {
-            // Set date to tomorrow (Saturday) at 11:00 AM
             const countDate = new Date("Feb 21, 2026 11:00:00").getTime();
-
             setInterval(() => {
                 const now = new Date().getTime();
                 const gap = countDate - now;
-
-                const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-                const d = Math.floor(gap / day), h = Math.floor((gap % day) / hour), m = Math.floor((gap % hour) / minute), s = Math.floor((gap % minute) / second);
-
-                document.getElementById('timer').innerText = `Counting down: ${h}h ${m}m ${s}s until our date! ⏳`;
+                const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((gap % (1000 * 60)) / 1000);
+                document.getElementById('timer').innerText = `Starting in: ${h}h ${m}m ${s}s ❤️`;
             }, 1000);
         }
     </script>
