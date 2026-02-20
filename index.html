@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question 🌸</title>
+    <style>
+        :root {
+            --pink: #ffafcc;
+            --dark-pink: #fb6f92;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-color: #fff0f3;
+        }
+
+        /* Page 1: The Question */
+        #page1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 { color: var(--dark-pink); font-size: 2rem; margin-bottom: 2rem; }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        #yesBtn { background-color: #70e000; color: white; }
+        #noBtn { 
+            background-color: #ff4d6d; 
+            color: white; 
+            position: absolute; 
+        }
+
+        /* Page 2: The Plan */
+        #page2 {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1517604931442-7e0c8ed0963c?q=80&w=2070'); /* Movie Background */
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 20px;
+        }
+
+        .cricket-theme { border-left: 5px solid #ff9933; border-right: 5px solid #128807; }
+
+        /* Meme Rain */
+        .meme-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .emoji { position: absolute; font-size: 2rem; animation: fall 3s linear forwards; }
+        @keyframes fall { to { transform: translateY(100vh); opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <div id="page1">
+        <div class="container">
+            <h1>Hello Cutiepie 🌸🎀<br>Is it okay if I officially block your Saturday and Sunday this weekend?</h1>
+            <div class="btn-group">
+                <button id="yesBtn" onclick="showPlan()">YES</button>
+                <button id="noBtn" onmouseover="moveButton()">NO</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2">
+        <h1 style="color: white; font-size: 2.5rem;">Yay! See you soon ❤️</h1>
+        <p>I’ve already pictured this weekend with you… feels nice already.</p>
+        
+        <div class="card">
+            <h3>Day 1: Saturday 🎬</h3>
+            <p><strong>MOVIE DATE</strong></p>
+            <p>"I pretend to focus on the screen but actually watch you smile 🫣🥰"</p>
+            <p>📍 Nexus Mall, Koramangala</p>
+        </div>
+
+        <div class="card cricket-theme">
+            <h3>Day 2: Sunday 🏏</h3>
+            <p><strong>MATCH DATE</strong></p>
+            <p>"We cheer for India together and I celebrate every boundary like I just won you. ❤️"</p>
+            <p>📍 Sky Garden Bar & Kitchen, Koramangala</p>
+        </div>
+
+        <div id="meme-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zic3RieXpqcXN4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnBvcz10JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l2R013mIf1ZXdvoyI/giphy.gif" width="200" style="border-radius: 10px; margin: 10px;">
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+            // Trigger Crying Emojis/Dogs
+            spawnEmojis();
+        }
+
+        function spawnEmojis() {
+            for(let i=0; i<15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji';
+                emoji.innerText = Math.random() > 0.5 ? '😭' : '🐶';
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.top = '-50px';
+                emoji.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 3000);
+            }
+        }
+
+        function showPlan() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
