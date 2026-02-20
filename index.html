@@ -3,34 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Special Invitation 🌸</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>A Weekend for Us 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    
     <style>
         :root {
-            --primary: #ff758c;
-            --secondary: #ff7eb3;
-            --glass: rgba(255, 255, 255, 0.2);
-            --india-saffron: #FF9933;
-            --india-green: #128807;
+            --accent: #ff4d6d;
+            --india-blue: #0038A8;
+            --india-orange: #FF9933;
+            --text-main: #1a1a1a;
         }
-
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
-            background: #fff0f3;
-            height: 100%; overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: #0f0c29; /* Darker, premium base for contrast */
+            height: 100%; overflow-x: hidden;
         }
 
-        /* High-End Background Animation */
-        .bg-gradient {
+        .animated-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #243b55, #ff758c, #141e30, #ff7eb3);
             background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            animation: gradient 12s ease infinite;
             z-index: -1;
         }
 
@@ -40,109 +35,100 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Initial Question Page */
+        /* Page 1: High Contrast Landing */
         #page1 {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            height: 100vh; padding: 20px; text-align: center;
+            display: flex; align-items: center; justify-content: center;
+            height: 100vh; padding: 20px;
         }
 
-        .glass-container {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px; border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .hero-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 25px; border-radius: 35px;
+            text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             max-width: 400px; width: 100%;
-            border: 1px solid rgba(255,255,255,0.4);
         }
 
-        h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 30px; line-height: 1.4; }
+        h1 { color: var(--text-main); font-size: 1.6rem; line-height: 1.5; margin-bottom: 30px; font-weight: 800; }
 
-        .btn-wrapper {
-            display: flex; justify-content: center; gap: 20px;
-            position: relative; height: 60px; margin-top: 20px;
-        }
+        .btn-box { display: flex; justify-content: center; gap: 15px; position: relative; height: 60px; }
 
         .btn {
-            padding: 12px 35px; border-radius: 50px;
-            font-size: 1.1rem; font-weight: 600; border: none;
-            cursor: pointer; transition: all 0.3s ease;
+            padding: 14px 35px; border-radius: 50px; font-size: 1.1rem;
+            font-weight: 700; border: none; cursor: pointer; transition: 0.3s;
         }
 
-        #yesBtn { background: #ff4d6d; color: white; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3); }
-        #noBtn { background: #6c757d; color: white; position: absolute; left: 55%; }
+        #yesBtn { background: var(--accent); color: white; box-shadow: 0 8px 20px rgba(255,77,109,0.4); }
+        #noBtn { background: #333; color: white; position: absolute; left: 55%; }
 
-        /* Reveal Page */
+        /* Page 2: Premium Reveal */
         #page2 {
-            display: none; height: 100vh; overflow-y: auto;
-            padding: 40px 20px; text-align: center; color: white;
+            display: none; padding: 30px 15px; text-align: center; color: white;
         }
 
-        .timer-bar {
-            background: rgba(255,255,255,0.2);
-            padding: 15px; border-radius: 20px; margin-bottom: 30px;
-            backdrop-filter: blur(5px); font-weight: 600;
+        .timer-tag {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            padding: 12px; border-radius: 15px; margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2); font-weight: 600; color: #ffafcc;
         }
 
-        .event-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
+        .plan-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 25px; padding: 25px; margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            text-align: left; transition: transform 0.3s ease;
+            text-align: left; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        .event-card:hover { transform: translateY(-5px); }
+        .plan-card h2 { margin: 0 0 10px 0; font-size: 1.5rem; color: #fff; }
+        .plan-card p { font-size: 1rem; line-height: 1.6; color: #e0e0e0; margin: 5px 0; }
+        .label {
+            display: inline-block; padding: 4px 12px; border-radius: 8px;
+            font-size: 0.75rem; font-weight: 800; margin-bottom: 12px; letter-spacing: 1px;
+        }
 
-        .event-card h2 { margin-top: 0; color: #fff; font-size: 1.4rem; }
-        .tag { display: inline-block; padding: 5px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; }
-        .tag-movie { background: #ff7eb3; }
-        .tag-cricket { background: var(--india-saffron); }
-
-        .shayari {
+        .shayari-reveal {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem; margin: 40px 0; line-height: 1.6;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.8rem; margin: 40px 0; color: #fff;
+            line-height: 1.6; text-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        .emoji-rain { position: fixed; pointer-events: none; z-index: 1000; }
+        .emoji-fly { position: fixed; pointer-events: none; z-index: 1000; font-size: 2.5rem; transition: 3s linear; }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
+    <div class="animated-bg"></div>
 
     <div id="page1">
-        <div class="glass-container">
+        <div class="hero-card">
             <h1>Hello Cutiepie 🌸🎀<br>Is it okay if I officially block your Saturday and Sunday this weekend?</h1>
-            <div class="btn-wrapper">
-                <button id="yesBtn" class="btn" onclick="accept()">YES</button>
-                <button id="noBtn" class="btn" onmouseover="dodge()" onclick="dodge()">NO</button>
+            <div class="btn-box">
+                <button id="yesBtn" class="btn" onclick="letGo()">YES</button>
+                <button id="noBtn" class="btn" onmouseover="moveNo()" onclick="moveNo()">NO</button>
             </div>
         </div>
     </div>
 
     <div id="page2">
-        <div class="timer-bar" id="countdown">Calculating hours until happiness...</div>
+        <div class="timer-tag" id="timer">Preparing our weekend...</div>
         
-        <h1 style="font-family: 'Dancing Script', cursive; font-size: 3rem; margin-bottom: 10px;">It's a Date! ❤️</h1>
-        <p style="margin-bottom: 40px;">I've already pictured this weekend with you... feels nice already.</p>
-
-        <div class="event-card">
-            <span class="tag tag-movie">SATURDAY 🎬</span>
+        <h1 style="color: white; font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin: 10px 0;">It's a Date! ❤️</h1>
+        
+        <div class="plan-card" style="border-top: 4px solid var(--accent);">
+            <span class="label" style="background: var(--accent); color: white;">SATURDAY 🎬</span>
             <h2>Movie Date</h2>
-            <p>"I pretend to focus on the screen but actually watch you smile 🫣🥰"</p>
-            <p style="opacity: 0.8;">📍 Nexus Mall, Koramangala</p>
+            <p><strong>"I pretend to focus on the screen but actually watch you smile 🫣🥰"</strong></p>
+            <p>📍 Nexus Mall, Koramangala</p>
         </div>
 
-        <div class="event-card" style="border-bottom: 5px solid var(--india-green);">
-            <span class="tag tag-cricket">SUNDAY 🏏</span>
+        <div class="plan-card" style="border-top: 4px solid var(--india-orange);">
+            <span class="label" style="background: var(--india-orange); color: white;">SUNDAY 🏏</span>
             <h2>Match Date</h2>
-            <p>"We cheer for India together and I celebrate every boundary like I just won you. ❤️"</p>
-            <p style="opacity: 0.8;">📍 Sky Garden Bar & Kitchen, Koramangala</p>
+            <p><strong>"We cheer for India together and I celebrate every boundary like I just won you. ❤️"</strong></p>
+            <p>📍 Sky Garden Bar & Kitchen, Koramangala</p>
         </div>
 
-        <div class="shayari">
+        <div class="shayari-reveal">
             "Kuch panne waqt ke, hum saath likhenge,<br>
             Ek din cricket, ek din movie ke naam likhenge.<br>
             Tumhari muskurahat hi meri asli jeet hai,<br>
@@ -151,63 +137,37 @@
     </div>
 
     <script>
-        // Logic for the NO button to jump around
-        function dodge() {
-            const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 120);
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+
+            const e = document.createElement('div');
+            e.className = 'emoji-fly';
+            e.innerHTML = Math.random() > 0.5 ? '😭' : '🐶';
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.top = '-50px';
+            document.body.appendChild(e);
+            setTimeout(() => { e.style.transform = 'translateY(110vh)'; }, 10);
+            setTimeout(() => e.remove(), 3000);
+        }
+
+        function letGo() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
             
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-            noBtn.style.zIndex = '1000';
-
-            // Crying emoji rain
-            for(let i=0; i<10; i++) {
-                const e = document.createElement('div');
-                e.className = 'emoji-rain';
-                e.innerHTML = Math.random() > 0.5 ? '😭' : '🐶';
-                e.style.left = Math.random() * 100 + 'vw';
-                e.style.top = '-20px';
-                e.style.fontSize = '2rem';
-                e.style.transition = 'transform 3s linear';
-                document.body.appendChild(e);
-                
-                setTimeout(() => {
-                    e.style.transform = 'translateY(110vh)';
-                }, 10);
-                setTimeout(() => e.remove(), 3000);
-            }
-        }
-
-        // Logic for YES
-        function accept() {
-            // Confetti Cannon
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff758c', '#ff7eb3', '#FF9933', '#ffffff']
-            });
-
-            setTimeout(() => {
-                document.getElementById('page1').style.display = 'none';
-                document.body.style.overflow = 'auto';
-                document.getElementById('page2').style.display = 'block';
-                updateTimer();
-            }, 600);
-        }
-
-        // Countdown Logic
-        function updateTimer() {
             const target = new Date("Feb 21, 2026 11:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
-                const dist = target - now;
-                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((dist % (1000 * 60)) / 1000);
-                document.getElementById('countdown').innerHTML = `Starting in: ${h}h ${m}m ${s}s ❤️`;
+                const diff = target - now;
+                const h = Math.floor((diff % (86400000)) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('timer').innerHTML = `Starts in: ${h}h ${m}m ${s}s ❤️`;
             }, 1000);
         }
     </script>
